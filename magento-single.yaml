@@ -146,16 +146,19 @@ parameters:
     label: Admin Email
     description: Email address to associate with the Magento admin account.
     type: string
+    default: admin@example.com
 
   first_name:
     label: First Name
     description: First name of the Admin user
     type: string
+    default: first
 
   last_name:
     label: Last Name
     description: Last name of the Admin user
     type: string
+    default: last
 
   install_sample_data:
     label: Install Sample Data
