@@ -264,6 +264,10 @@ resources:
             acl: "127.0.0.1"
         memcached:
           listen: "127.0.0.1"
+        mysql:
+          server_root_password: { get_attr: [mysql_root_password, value] }
+          server_debian_password: { get_attr: [mysql_debian_password, value] }
+          server_repl_password: { get_attr: [mysql_repl_password, value] }
         rax:
           magento:
             admin_user:
