@@ -1,0 +1,46 @@
+{
+  "name": "magento",
+  "version": "0.8.2",
+  "description": "Magento app stack",
+  "long_description": "# Magento Cookbook\n\nCollection of recipes to build app stack for the [Magento][] deployments with\n[Chef][]\n\n## Installation\n\n### With Berkshelf\n\n    echo \"cookbook 'magento', '~> 0.7'\" >> Berksfile\n    berks install\n    berks upload # if using with Chef Server\n\n### With Chef Repository\n\nRun the following commands with-in your [Chef Repository][]:\n\n    knife cookbook site install magento\n    knife cookbook upload magento\n\n## Usage Examples\n\n### Single Rackspace Cloud Server Instance\n\nBootstrap [Rackspace Cloud Servers][] instance with:\n\n    knife rackspace server create --run-list 'recipe[magento]' --server-name magebox --image 125 --flavor 3\n\nNavigate to the node URL or IP in your browser to complete [Magento][] installation.\nNOTE: you might need to skip base url validation.\n\nDefault Mysql Credentials:\n\n * database: magento\n * user: magentouser\n * password: randombly generated, see magento -> db attributes under Chef Server dashboard\n\nSee [Launch Cloud Instances with Knife][] for the reference.\n\n## Hacking\n\nThe project preconfigured with a helper tools for bootstraping cookbook in a\nsandboxed environment, i.e. [VirtualBox][]\n\n### Requirements\n\n * [Bundler][]: `gem install bundler`\n * [Berkshelf][]: `bundle install`\n * [Vagrant][] 1.1.0 and greater\n * Berkshelf plugin for Vagrant: `vagrant plugin install vagrant-berkshelf`\n * Omnibus plugin for Vagrant: `vagrant plugin install vagrant-omnibus`\n\n### Bootstrap VirtualBox\n\n#### With Ubuntu 12.04\n\n    vagrant up\n\n#### With CentOS 6.5\n\n    VMBOX='centos65' vagrant up\n\n\n## Contributing\n\n1. Fork it\n2. Create your feature branch (`git checkout -b my-new-feature`)\n3. Commit your changes (`git commit -am 'Added some feature'`)\n4. Push to the branch (`git push origin my-new-feature`)\n5. Create new Pull Request\n\n\n[Magento]:http://www.magentocommerce.com/\n[Chef]:http://www.opscode.com/chef/\n[Chef Repository]:http://wiki.opscode.com/display/chef/Chef+Repository\n[Chef Roles]:http://wiki.opscode.com/display/chef/Roles\n[Rackspace Cloud Servers]:http://www.rackspace.com/cloud/cloud_hosting_products/servers/\n[Launch Cloud Instances with Knife]:http://wiki.opscode.com/display/chef/Launch+Cloud+Instances+with+Knife\n[VirtualBox]:https://www.virtualbox.org/\n[Vagrant]:http://vagrantup.com/\n[Berkshelf]:http://berkshelf.com/\n[Bundler]:http://gembundler.com/\n",
+  "maintainer": "Yevgeniy Viktorov",
+  "maintainer_email": "craftsman@yevgenko.me",
+  "license": "Apache 2.0",
+  "platforms": {
+    "debian": ">= 0.0.0",
+    "ubuntu": ">= 0.0.0",
+    "centos": ">= 0.0.0",
+    "redhat": ">= 0.0.0",
+    "fedora": ">= 0.0.0",
+    "amazon": ">= 0.0.0"
+  },
+  "dependencies": {
+    "apt": ">= 0.0.0",
+    "yum": ">= 0.0.0",
+    "apache2": ">= 0.0.0",
+    "nginx": "~> 2.6",
+    "mysql": ">= 0.0.0",
+    "openssl": ">= 0.0.0",
+    "php": ">= 0.0.0",
+    "yum-epel": ">= 0.0.0",
+    "mysql-chef_gem": ">= 0.0.0",
+    "php-fpm": ">= 0.6.4"
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+  },
+  "groupings": {
+  },
+  "recipes": {
+    "magento": "Prepares app stack for magento deployments"
+  }
+}
