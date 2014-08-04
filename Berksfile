@@ -7,4 +7,4 @@ cookbook 'rax-magento',
   :git => 'https://github.com/brint/rax-magento'
 cookbook 'magento',
   :git => 'https://github.com/yevgenko/cookbook-magento',
-  :ref => 'eeb94cf7988b7746377d1b4d6464d01312b58550'
+  :ref => 'c8193b51439a7eca7e5bc7d4b788512c505fe237'
