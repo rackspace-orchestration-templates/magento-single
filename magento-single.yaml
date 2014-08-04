@@ -254,8 +254,24 @@ resources:
               user: "root"
               host: "localhost"
               password: { get_attr: [mysql_root_password, value] }
+        magento:
+          domain: { get_param: domain }
+          db:
+            database: { get_param: database_name }
+            host: "127.0.0.1"
+            username: { get_param: database_user }
+            password: { get_attr: [database_password, value] }
+            acl: "127.0.0.1"
         memcached:
           listen: "127.0.0.1"
+        rax:
+          magento:
+            admin_user:
+              firstname: { get_param: first_name }
+              lastname: { get_param: last_name }
+              email: { get_param: admin_email}
+              username: { get_param: username }
+              password: { get_attr: [admin_password, value] }
         run_list: ["recipe[apt]",
                    "recipe[build-essential]",
                    "recipe[rax-magento]"]
