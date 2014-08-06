@@ -255,6 +255,7 @@ resources:
               host: "localhost"
               password: { get_attr: [mysql_root_password, value] }
         magento:
+          http_port: 8080
           domain: { get_param: domain }
           db:
             database: { get_param: database_name }
