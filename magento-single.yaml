@@ -178,7 +178,7 @@ parameters:
     label: Chef Version
     description: Version of chef client to use
     type: string
-    default: 11.12.8
+    default: 11.14.2
 
 resources:
   # Random password generation
