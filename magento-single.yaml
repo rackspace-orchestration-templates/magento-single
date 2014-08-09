@@ -255,7 +255,6 @@ resources:
               host: "localhost"
               password: { get_attr: [mysql_root_password, value] }
         magento:
-          http_port: 8080
           domain: { get_param: domain }
           db:
             database: { get_param: database_name }
@@ -281,7 +280,8 @@ resources:
             tcp: [80, 443]
         run_list: ["recipe[apt]",
                    "recipe[build-essential]",
-                   "recipe[rax-magento]"]
+                   "recipe[rax-magento]",
+                   "recipe[rax-firewall]"]
 
 outputs:
   private_key:
