@@ -1,7 +1,7 @@
 schema-version: 1.0.0
 application-family: eCommerce
 application-name: Magento
-application-version: 1.8.1.0
+application-version: 1.9.0.1
 flavor: Single Linux server
 flavor-weight: 2
 reach-info:
@@ -54,7 +54,7 @@ instructions: |
   will take eCommerce site down.
 
   [Nginx](http://nginx.org/en/) is used as the web server and listens on port
-  8080 and 443 to handle web traffic. The configuration for your site can be
+  80 and 443 to handle web traffic. The configuration for your site can be
   found in /etc/nginx/sites-enabled. There will be a default site
   configuration, and a seperate one for SSL traffic. Magento itself is
   installed in /var/www/vhosts. You will find a directory with the name of
@@ -67,13 +67,6 @@ instructions: |
   evaluation of all PHP-based pages. The configuration for this installation is
   in /etc/php5/fpm/pools/magento.conf. By default, PHP-FPM is running as the
   'magento' user, listens on 127.0.0.1:9001.
-
-  [Varnish](https://www.varnish-cache.org/) is listening on port 80, and will
-  handle all HTTP traffic. Varnish provides a caching layer to serve static
-  content directly from memory. Anything that is not in cache will be passed
-  onto Nginx. Varnish will greatly improve your site's performance, especially
-  as traffic grows.  We leverage the VCL provided by the Magento PageCache
-  module.  The configuration file is /etc/varnish/default.vcl.
 
   Object and session caching are handled by
   [Memcached](http://www.memcached.org/).  Memcache helps performance by
