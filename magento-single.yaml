@@ -15,17 +15,18 @@ parameter_groups:
   parameters:
   - domain
   - username
-  - admin_email
-  - first_name
-  - last_name
   - install_sample_data
 
 - label: rax-dev-params
   parameters:
   - server_hostname
   - database_name
+  - database_user
   - kitchen
   - chef_version
+  - admin_email
+  - first_name
+  - last_name
 
 parameters:
 
