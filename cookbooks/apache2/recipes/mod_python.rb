@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: apache2
-# Recipe:: python
+# Recipe:: mod_python
 #
 # Copyright 2008-2013, Opscode, Inc.
 #
@@ -27,6 +27,12 @@ when 'suse'
 when 'rhel', 'fedora'
   package 'mod_python' do
     notifies :run, 'execute[generate-module-list]', :immediately
+  end
+when 'freebsd'
+  if node['apache']['version'] == '2.4'
+    package 'ap24-mod_python35'
+  else
+    package 'ap22-mod_python35'
   end
 end
 
