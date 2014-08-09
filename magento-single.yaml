@@ -281,6 +281,11 @@ resources:
         run_list: ["recipe[apt]",
                    "recipe[build-essential]",
                    "recipe[rax-magento]",
+                   "recipe[hollandbackup]",
+                   "recipe[hollandbackup::mysqldump]",
+                   "recipe[hollandbackup::main]",
+                   "recipe[hollandbackup::backupsets]",
+                   "recipe[hollandbackup::cron]",
                    "recipe[rax-firewall]"]
 
 outputs:
