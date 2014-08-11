@@ -277,6 +277,7 @@ resources:
               email: { get_param: admin_email}
               username: { get_param: username }
               password: { get_attr: [admin_password, value] }
+            encryption_key: { get_attr: [ magento_encryption_key, value ] }
           firewall:
             tcp: [80, 443]
         run_list: ["recipe[apt]",
