@@ -14,6 +14,7 @@ parameter_groups:
 - label: Magento Settings
   parameters:
   - domain
+  - terms
   - username
   - install_sample_data
 
@@ -160,6 +161,17 @@ parameters:
     description: Last name of the Admin user
     type: string
     default: last
+
+  terms:
+    label: Agree to Terms
+    description: |
+      Required: You must agree to the Magento Community Edition License which
+      can be found here: http://opensource.org/licenses/osl-3.0.php
+    type: boolean
+    constraints:
+    - allowed_values:
+      - true
+      description: Terms must be accepted.
 
   install_sample_data:
     label: Install Sample Data
