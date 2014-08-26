@@ -168,7 +168,6 @@ parameters:
       Required: You must agree to the Magento Community Edition License which
       can be found here: http://opensource.org/licenses/osl-3.0.php
     type: boolean
-    default: false
     constraints:
     - allowed_values:
       - true
