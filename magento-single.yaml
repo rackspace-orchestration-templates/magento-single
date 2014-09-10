@@ -16,7 +16,6 @@ parameter_groups:
   - domain
   - terms
   - username
-  - install_sample_data
 
 - label: rax-dev-params
   parameters:
@@ -28,6 +27,7 @@ parameter_groups:
   - admin_email
   - first_name
   - last_name
+  - install_sample_data
 
 parameters:
 
