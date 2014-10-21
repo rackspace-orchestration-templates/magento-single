@@ -51,10 +51,11 @@ parameters:
       Required: Server image used for all servers that are created as a part of
       this deployment.
     type: string
-    default: Ubuntu 12.04 LTS (Precise Pangolin)
+    default: CentOS 6.5 (PVHVM)
     constraints:
     - allowed_values:
       - Ubuntu 12.04 LTS (Precise Pangolin)
+      - CentOS 6.5 (PVHVM)
       description: Must be a supported operating system.
 
   flavor:
