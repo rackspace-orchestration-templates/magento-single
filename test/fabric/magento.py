@@ -24,7 +24,7 @@ def check():
         php_fpm_process_name = 'php-fpm'
         php_fpm_service_name = 'php-fpm'
     elif env.platform_family == 'debian':
-        memcache_user = 'memcached'
+        memcache_user = 'memcache'
         php_fpm_process_name = 'php5-fpm'
         php_fpm_service_name = 'php5-fpm'
 
@@ -37,16 +37,16 @@ def check():
 
     assert user.exists("magento"), 'magento user does not exist'
     assert user.exists("mysql"), 'mysql user does not exist'
-    assert user.exists(memcache_user), 'memcache user does not exist'
+    assert user.exists(memcache_user), '{} user does not exist'.format(memcache_user)
 
     assert process.is_up("nginx"), 'nginx is not running'
     assert process.is_up("mysqld"), 'mysqld is not running'
-    assert process.is_up(php_fpm_process_name), 'php5-fpm is not running'
+    assert process.is_up(php_fpm_process_name), '{} is not running'.format(php_fpm_process_name)
     assert process.is_up("memcached"), 'memcached is not running'
 
     assert service.is_enabled("nginx"), 'nginx service not enabled'
     assert service.is_enabled("mysql"), 'mysql service not enabled'
-    assert service.is_enabled(php_fpm_service_name), 'php5-fpm service not enabled'
+    assert service.is_enabled(php_fpm_service_name), '{} not enabled'.format(php_fpm_service_name)
     assert service.is_enabled("memcached"), 'memcached service not enabled'
 
     assert magento_is_responding(), 'Magento did not respond as expected.'
