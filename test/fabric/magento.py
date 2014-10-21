@@ -19,6 +19,15 @@ def check():
 
     assert file.exists('/var/www/magento/.configured'), '.configured did not exist'
 
+    if env.platform_family == 'rhel':
+        memcache_user = 'memcached'
+        php_fpm_process_name = 'php-fpm'
+        php_fpm_service_name = 'php-fpm'
+    elif env.platform_family == 'debian':
+        memcache_user = 'memcached'
+        php_fpm_process_name = 'php5-fpm'
+        php_fpm_service_name = 'php5-fpm'
+
     assert port.is_listening(80), 'port 80 is not listening'
     assert port.is_listening(443), 'port 443 is not listenging'
     assert port.is_listening(3306), 'port 3306 is not listening'
@@ -28,16 +37,16 @@ def check():
 
     assert user.exists("magento"), 'magento user does not exist'
     assert user.exists("mysql"), 'mysql user does not exist'
-    assert user.exists("memcache"), 'memcache user does not exist'
+    assert user.exists(memcache_user), 'memcache user does not exist'
 
     assert process.is_up("nginx"), 'nginx is not running'
     assert process.is_up("mysqld"), 'mysqld is not running'
-    assert process.is_up("php5-fpm"), 'php5-fpm is not running'
+    assert process.is_up(php_fpm_process_name), 'php5-fpm is not running'
     assert process.is_up("memcached"), 'memcached is not running'
 
     assert service.is_enabled("nginx"), 'nginx service not enabled'
     assert service.is_enabled("mysql"), 'mysql service not enabled'
-    assert service.is_enabled("php5-fpm"), 'php5-fpm service not enabled'
+    assert service.is_enabled(php_fpm_service_name), 'php5-fpm service not enabled'
     assert service.is_enabled("memcached"), 'memcached service not enabled'
 
     assert magento_is_responding(), 'Magento did not respond as expected.'
