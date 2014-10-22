@@ -55,6 +55,7 @@ parameters:
     constraints:
     - allowed_values:
       - Ubuntu 12.04 LTS (Precise Pangolin)
+      - CentOS 6.5
       description: Must be a supported operating system.
 
   flavor:
