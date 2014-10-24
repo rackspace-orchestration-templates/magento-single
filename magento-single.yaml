@@ -330,7 +330,7 @@ outputs:
 
   admin_user:
     description: Admin User
-    value: { get_param: admin_user }
+    value: { get_param: username }
 
   admin_password:
     description: Admin Password
