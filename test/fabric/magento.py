@@ -1,13 +1,14 @@
 import re
 from fabric.api import env, run, hide, task
-from envassert import detect, file, group, package, port, process, service, \
-    user
-from hot.utils.test import get_artifacts, http_check
+from envassert import detect, file, port, process, service, user
+from hot.utils.test import get_artifacts
 
 
 def magento_is_responding():
     with hide('running', 'stdout'):
-        homepage = run("wget --quiet --output-document - --header='Host: example.com' http://localhost/")
+        wget_cmd = ("wget --quiet --output-document - "
+                    "--header='Host: example.com' http://localhost/")
+        homepage = run(wget_cmd)
         if re.search('Magento Demo Store', homepage):
             return True
         else:
@@ -18,7 +19,8 @@ def magento_is_responding():
 def check():
     env.platform_family = detect.detect()
 
-    assert file.exists('/var/www/magento/.configured'), '.configured did not exist'
+    assert file.exists('/var/www/magento/.configured'), \
+        '.configured did not exist'
 
     if env.platform_family == 'rhel':
         memcache_user = 'memcached'
@@ -38,16 +40,19 @@ def check():
 
     assert user.exists("magento"), 'magento user does not exist'
     assert user.exists("mysql"), 'mysql user does not exist'
-    assert user.exists(memcache_user), '{} user does not exist'.format(memcache_user)
+    assert user.exists(memcache_user), \
+        '{} user does not exist'.format(memcache_user)
 
     assert process.is_up("nginx"), 'nginx is not running'
     assert process.is_up("mysqld"), 'mysqld is not running'
-    assert process.is_up(php_fpm_process_name), '{} is not running'.format(php_fpm_process_name)
+    assert process.is_up(php_fpm_process_name), \
+        '{} is not running'.format(php_fpm_process_name)
     assert process.is_up("memcached"), 'memcached is not running'
 
     assert service.is_enabled("nginx"), 'nginx service not enabled'
     assert service.is_enabled("mysql"), 'mysql service not enabled'
-    assert service.is_enabled(php_fpm_service_name), '{} not enabled'.format(php_fpm_service_name)
+    assert service.is_enabled(php_fpm_service_name), \
+        '{} not enabled'.format(php_fpm_service_name)
     assert service.is_enabled("memcached"), 'memcached service not enabled'
 
     assert magento_is_responding(), 'Magento did not respond as expected.'
