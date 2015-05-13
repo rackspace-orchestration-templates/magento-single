@@ -8,6 +8,16 @@ test-cases:
     ssh_private_key: { get_output: private_key } # Fetch from output-list of stack
     ssh_key_file: tmp/private_key # File to write with ssh_private_key
     tests:
+    - check_login:
+        script:
+          commands:
+            - command: '/bin/sleep 30'  # sleep to let magento fully initialize
+            - command: "./test/script/magento_login.py"
+              command_args:
+                - { get_output: server_ip }
+                - { get_output: magento_domain }
+                - { get_output: admin_user }
+                - { get_output: admin_password }
     - magento_server:
         fabric:
           # Fabric environment settings to use while running envassert script
@@ -35,6 +45,16 @@ test-cases:
     ssh_private_key: { get_output: private_key } # Fetch from output-list of stack
     ssh_key_file: tmp/private_key # File to write with ssh_private_key
     tests:
+    - check_login:
+        script:
+          commands:
+            - command: '/bin/sleep 30'  # sleep to let magento fully initialize
+            - command: "./test/script/magento_login.py"
+              command_args:
+                - { get_output: server_ip }
+                - { get_output: magento_domain }
+                - { get_output: admin_user }
+                - { get_output: admin_password }
     - magento_server:
         fabric:
           # Fabric environment settings to use while running envassert script
