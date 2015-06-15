@@ -320,6 +320,10 @@ outputs:
         params:
           "%domain%": { get_param: domain }
 
+  magento_domain:
+    description: Base domain for magento install
+    value: { get_param: domain }
+
   admin_url:
     description: Admin URL
     value:
