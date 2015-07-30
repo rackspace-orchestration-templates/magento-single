@@ -12,13 +12,7 @@ hidden_outputs:
   - admin_password
   - mysql_root_password
 abstract: |
-  Single Linux server with [Magento Community
-  Edition](http://www.magentocommerce.com/product/community-edition/) installed
-  with [nginx](http://nginx.org/en/), [PHP FPM](http://php-fpm.org/about/), and
-  [MySQL 5.5](http://www.mysql.com/).
-
-  This deployment is intended for simple test cases and low traffic scenarios.
-  It is not for high traffic events and is not easily scalable.
+  Magento is an open-source eCommerce platform written in PHP.
 instructions: |
   #### Getting Started
   If you're new to Magento Community Edition, the [Magento User
