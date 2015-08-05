@@ -1,8 +1,14 @@
 heat_template_version: 2013-05-23
 
 description: |
-  This is a Heat template to deploy a single Linux server running Magento
-  Community Edition.
+  #### Single Server
+
+  Single Linux server with
+  [Magento 1.9.0.1 Community Edition](http://www.magentocommerce.com/product/community-edition/)
+  installed with [nginx](http://nginx.org/en/),
+  [PHP FPM](http://php-fpm.org/about/) and [MySQL 5.5](http://www.mysql.com/).
+  This deployment is intended for simple test cases and low traffic scenarios.
+  It is not designed for high traffic events and is not easily scalable.
 
 parameter_groups:
 
