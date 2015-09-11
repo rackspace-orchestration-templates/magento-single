@@ -4,6 +4,7 @@ application-name: Magento
 application-version: 1.9.0.1
 flavor: Single Linux server
 flavor-weight: 2
+popularity: 2
 reach-info:
   tattoo: https://0b5294b243620310a700-e388a7f3aba385a925111b1fc6f680d4.ssl.cf2.rackcdn.com/magento-tattoo.png
   icon-20x20: https://0b5294b243620310a700-e388a7f3aba385a925111b1fc6f680d4.ssl.cf2.rackcdn.com/magento-icon-20x20.png
