@@ -1,19 +1,22 @@
 schema-version: 1.0.0
 application-family: eCommerce
 application-name: Magento
-application-version: 1.9.0.1
+application-version: 1.9.2.0
 flavor: Single Linux server
 flavor-weight: 2
-popularity: 4
+popularity: 2
 reach-info:
   tattoo: https://0b5294b243620310a700-e388a7f3aba385a925111b1fc6f680d4.ssl.cf2.rackcdn.com/magento-tattoo.png
   icon-20x20: https://0b5294b243620310a700-e388a7f3aba385a925111b1fc6f680d4.ssl.cf2.rackcdn.com/magento-icon-20x20.png
 hidden_outputs:
-  - private_key
-  - admin_password
-  - mysql_root_password
+  - ssh_pub_key
+  - ssh_priv_key
+  - magento_admin_password
+  - magento_db_password
+
 abstract: |
   Magento is an open-source eCommerce platform written in PHP.
+  
 instructions: |
   #### Getting Started
   If you're new to Magento Community Edition, the [Magento User
@@ -44,23 +47,15 @@ instructions: |
 
   #### Details of Your Setup
   This deployment was stood up using
-  [chef-solo](http://docs.opscode.com/chef_solo.html). Once the deployment is
-  up, chef will not run again, so it is safe to modify configurations.
-
-  A system user named 'magento' has been created.  This user does not have a
-  password set, so if you wish to use the account, a password will need to be
-  set.  This account is the system user for PHP-FPM, so deletion of this user
-  will take eCommerce site down.
+  [Ansible](http://www.ansible.com/home). Once the deployment is
+  up, Ansible will not run again, so it is safe to modify configurations.
 
   [Nginx](http://nginx.org/en/) is used as the web server and listens on port
-  80 and 443 to handle web traffic. The configuration for your site can be
-  found in /etc/nginx/sites-enabled. There will be a default site
-  configuration, and a seperate one for SSL traffic. Magento itself is
+  80 to handle web traffic. The configuration for your site can be
+  found in /etc/nginx/conf.d/. There will be a default site
+  configuration and a seperate one for your domain. Magento itself is
   installed in /var/www/vhosts. You will find a directory with the name of
-  website you entered as a part of this deployment. The SSL certificates used
-  are self signed and were generated when this deployment was created. You can
-  replace the private key and certificate by overwriting the ones in
-  /etc/nginx/ssl.
+  website you entered as a part of this deployment.
 
   [PHP-FPM](http://php.net/manual/en/install.fpm.php) is used to handle
   evaluation of all PHP-based pages. The configuration for this installation is
@@ -68,23 +63,22 @@ instructions: |
   'magento' user, listens on 127.0.0.1:9001.
 
   Object and session caching are handled by
-  [Memcached](http://www.memcached.org/).  Memcache helps performance by
-  storing data in memory for faster responses to clients. These caches help
-  lessen the number of queries required to the database.  There are two
-  seperate instances of Memcached running to ensure session and object caching
-  are handled seperately.  The session cache is listening on 127.0.0.1:11211,
-  and is set as a 512MB cache.  The object cache is listening on
-  127.0.0.1:11212, and it is set as a 1.5GB cache.  The configuration files are
-  memcached_sessions.conf and memcached_backend.conf in /etc.
+  [Redis](http://redis.io/). Redis is an in-memory, high performance key-value
+  and is used for caching data and persisting user session data. This enhances
+  the performance of your site by reducing expensive database calls. Three caches
+  are configured: two for data caching and one for session persistance. You can
+  find the configuration of these caches in /etc/redis/.
 
-  [MySQL 5.5](http://www.mysql.com/) is installed as the database backend. All
-  configuration with Magento has been handled as a part of the setup. The MySQL
-  root password is provided as a part of this deployment.  If you lose or
-  forget the password, it can also be found in /root/.my.cnf.
+  [Rackspace Cloud Databases](http://www.rackspace.com/en-us/cloud/databases) provides
+  the database backend running
+  [Percona](https://www.percona.com/software/mysql-database/percona-server) on a single
+  instance. 
 
-  MySQL backups are performed nightly by
+  Database backups are performed nightly by
   [Holland](https://github.com/holland-backup/holland).  Backups can be found
-  in /var/lib/mysqlbackup.
+  in /var/spool/holland. You can adjust this backup schedule by editing the cron job found
+  at /etc/cron.d/holland. Additionally, backups are archived daily using
+  [Rackspace Cloud Backups](http://www.rackspace.com/cloud/backup).
 
   #### Magento Plugins
   There are thousands of plugins that have been developed for Magento by the
@@ -97,11 +91,14 @@ instructions: |
   #### Additional Notes
   There is not an automatic way to add additional nodes to this deployment.
   This deployment is meant for lower traffic or testing scenarios.
+
 user-input-required: true
 description: |
-  Single Linux server with
-  [Magento 1.9.0.1 Community Edition](http://www.magentocommerce.com/product/community-edition/)
-  installed with [nginx](http://nginx.org/en/),
-  [PHP FPM](http://php-fpm.org/about/) and [MySQL 5.5](http://www.mysql.com/).
-  This deployment is intended for simple test cases and low traffic scenarios.
-  It is not designed for high traffic events and is not easily scalable.
+  A Single Linux server with
+  [Magento 1.9.2.0 Community Edition](http://www.magentocommerce.com/product/community-edition/)
+  installed with [nginx](http://nginx.org/en/), [PHP FPM](http://php-fpm.org/about/), a
+  Cloud Load Balancer for content caching, and a Cloud Database running
+  [Percona](https://www.percona.com/software/mysql-database/percona-server).
+
+  This deployment is intended for simple test cases and low traffic scenarios. It is not
+  designed for high traffic events and has limited scalability.
